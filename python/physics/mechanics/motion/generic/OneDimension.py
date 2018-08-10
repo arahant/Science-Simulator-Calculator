@@ -40,11 +40,6 @@ print("Distance travelled is "+str(distance)+" m")
 force = calculateForce(v2,t)
 print("Internal force is "+str(force)+" N")
 
-#s = getDistanceEquation()
-#print(s)
-#s = getAccelerationEquation()
-#print(s)
-
 t1 = nm.arange(0.0,10.0,0.5)
 plt.figure(1)
 plt.subplot(211)
