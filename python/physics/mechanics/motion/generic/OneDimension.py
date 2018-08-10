@@ -28,10 +28,6 @@ def getDistanceEquation(t, iVelocity, acc):
     return iVelocity*t + float(acc)/2*(t*t)
 
 #
-acc = 0
-distance = 0
-force = 0
-
 mass = input("Enter the mass of the object: ")
 iVelocity = input("Enter the initial velocity of the object: ")
 v2 = input("Enter the current velocity of the object: ")
