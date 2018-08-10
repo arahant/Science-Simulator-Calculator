@@ -22,10 +22,6 @@ def getDistanceEquation(theta):
 	return float(radius)*nm.cos(theta)+float(radius)*nm.sin(theta)
 
 #
-cfAcc = 0
-cfForce = 0
-cpForce = 0
-
 mass = input("Enter the mass of the object: ")
 radius = input("Enter the radius of the circular path: ")
 velocity = input("Enter the constant velocity of the object: ")
