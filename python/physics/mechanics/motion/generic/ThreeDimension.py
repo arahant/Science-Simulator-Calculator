@@ -73,19 +73,6 @@ def calculateForce():
 	return math.sqrt(math.pow(forceX,2)+math.pow(forceY,2)+math.pow(forceZ,2));
 
 #
-accX = 0
-accY = 0
-accZ = 0
-acc = 0
-distanceX = 0
-distanceY = 0
-distanceZ = 0
-distance = 0
-forceX = 0
-forceY = 0
-forceZ = 0
-force = 0
-
 mass = input("Enter the mass of the object: ")
 iVelocityX = input("Enter the initial x-velocity of the object: ")
 iVelocityY = input("Enter the initial y-velocity of the object: ")
