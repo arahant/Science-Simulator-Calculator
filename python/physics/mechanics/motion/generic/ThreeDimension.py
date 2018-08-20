@@ -2,124 +2,91 @@ import math
 import numpy as nm
 import matplotlib.pyplot as plt
 
-# along x-axis
-def calculateAccelerationX(v2, t):
-    accX = (v2 - iVelocityX)/t
-    return accX
+def calculateAcceleration(V1,V2,t):
+    return float(V2-V1)/t
 
-def calculateDistanceX(v2, t):
-    if accX == 0:
-        calculateAccelerationX(v2,t)
-    distanceX = iVelocityX*t + accX*t*t/2
-    return distanceX
+def calculateDistance(V1,V2,t,acc=0):
+    if acc == 0:
+        acc = calculateAcceleration(V1,V2,t)
+    return float(V1)*t + float(acc)*t*t/2
 
-def calculateForceX(v2, t):
-    if accX == 0:
-        calculateAccelerationX(v2,t)
-    forceX = mass*accX
-    return forceX
+def calculateForce(mass,V1,V2,t,acc=0):
+    if acc == 0:
+        acc = calculateAcceleration(V1,V2,t)
+    return float(mass)*acc
 
-def getDistanceEquationX(t, iVelocityX, accX):
-    return iVelocityX*t + float(accX)/2*(t*t)
+def calculateResultantValue(V1,V2,V3):
+	return math.sqrt(float(V1)*V2+float(V2)*V2+float(V3)*V3);
 
-# along y-axis
-def calculateAccelerationY(v2, t):
-    accY = (v2 - iVelocityY)/t
-    return accY
-
-def calculateDistanceY(v2, t):
-    if accY == 0:
-        calculateAccelerationY(v2,t)
-    distanceY = iVelocityY*t + accY*t*t/2
-    return distanceY
-
-def calculateForceY(v2, t):
-    if accY == 0:
-        calculateAccelerationY(v2,t)
-    forceY = mass*accY
-    return forceY
-
-def getDistanceEquationY(t, iVelocityY, accY):
-    return iVelocityY*t + float(accY)/2*(t*t)
-
-# along z-axis
-def calculateAccelerationZ(v2, t):
-    accZ = (v2 - iVelocityZ)/t
-    return accZ
-
-def calculateDistanceZ(v2, t):
-    if accZ == 0:
-        calculateAccelerationZ(v2,t)
-    distanceZ = iVelocityZ*t + accZ*t*t/2
-    return distanceZ
-
-def calculateForceZ(v2, t):
-    if accZ == 0:
-        calculateAccelerationZ(v2,t)
-    forceZ = mass*accZ
-    return forceZ
-
-def getDistanceEquationZ(t, iVelocityZ, accZ):
-    return iVelocityZ*t + float(accZ)/2*(t*t)
-
-# final
-def calculateAcceleration():
-	return math.sqrt(math.pow(accX,2)+math.pow(accY,2)+math.pow(accZ,2));
-
-def calculateDistance():
-	return math.sqrt(math.pow(distanceX,2)+math.pow(distanceY,2)+math.pow(distanceZ,2));
-
-def calculateForce():
-	return math.sqrt(math.pow(forceX,2)+math.pow(forceY,2)+math.pow(forceZ,2));
+def getDistance_Time_Equation(t, V1, acc):
+    return float(V1)*t + float(acc)*(t*t)/2
 
 #
-mass = input("Enter the mass of the object: ")
-iVelocityX = input("Enter the initial x-velocity of the object: ")
-iVelocityY = input("Enter the initial y-velocity of the object: ")
-iVelocityZ = input("Enter the initial z-velocity of the object: ")
-v2X = input("Enter the current x-velocity of the object: ")
-v2Y = input("Enter the current y-velocity of the object: ")
-v2Z = input("Enter the current z-velocity of the object: ")
-t = input("Enter the duration of motion: ")
+def initiate():
+    mass = input("Enter the mass of the object: ")
+    V1 = input("Enter the initial velocity of the object: ")
+    phi1 = input("Enter the initial angle with z axis: ")
+    theta1 = input("Enter the initial angle with x axis: ")
+    V2 = input("Enter the current velocity of the object: ")
+    phi2 = input("Enter the current angle with z axis: ")
+    theta2 = input("Enter the current angle with x axis: ")
+    t = input("Enter the duration of motion: ")
+    calculate(mass,V1,phi1,theta1,V2,phi2,theta2,t)
 
-accX = calculateAccelerationX(v2X,t)
-print("Acceleration-x is "+str(accX)+" m/s2")
-accY = calculateAccelerationY(v2Y,t)
-print("Acceleration-y is "+str(accY)+" m/s2")
-accZ = calculateAccelerationZ(v2Z,t)
-print("Acceleration-z is "+str(accZ)+" m/s2")
-acc = calculateAcceleration()
-print("Resultant acceleration is "+str(acc)+" m/s2")
+def calculate(mass,V1,phi1,angle1,V2,phi2,angle2,t):
+    V1XY = float(V1)*nm.sin(nm.pi*phi1/180)
+    V1X = float(V1XY)*nm.cos(nm.pi*theta1/180)
+    V1Y = float(V1XY)*nm.sin(nm.pi*theta1/180)
+    V1Z = float(V1)*nm.cos(nm.pi*phi1/180)
+    V2XY = float(V2)*nm.sin(nm.pi*phi2/180)
+    V2X = float(V2XY)*nm.cos(nm.pi*theta2/180)
+    V2Y = float(V2XY)*nm.sin(nm.pi*theta2/180)
+    V2Z = float(V2)*nm.cos(nm.pi*phi2/180)
 
-distanceX = calculateDistanceX(v2X,t)
-print("X Distance travelled is "+str(distanceX)+" m")
-distanceY = calculateDistanceY(v2Y,t)
-print("Y Distance travelled is "+str(distanceY)+" m")
-distanceZ = calculateDistanceZ(v2Z,t)
-print("Z Distance travelled is "+str(distanceZ)+" m")
-distance = calculateDistance()
-print("Resultant distance = "+str(distance)+" m")
+    accX = calculateAcceleration(V1X,V2X,t)
+    print("Acceleration-x is "+str(accX)+" m/s2")
+    accY = calculateAcceleration(V1Y,V2Y,t)
+    print("Acceleration-y is "+str(accY)+" m/s2")
+    accZ = calculateAcceleration(V1Z,V2Z,t)
+    print("Acceleration-Z is "+str(accZ)+" m/s2")
+    acc = calculateResultantValue(accX,accY,accZ)
+    print("Resultant acceleration is "+str(acc)+" m/s2")
 
-forceX = calculateForceX(v2X,t)
-print("Internal force-x is "+str(forceX)+" N")
-forceY = calculateForceY(v2Y,t)
-print("Internal force-y is "+str(forceY)+" N")
-forceZ = calculateForceZ(v2Z,t)
-print("Internal force-Z is "+str(forceZ)+" N")
-force = calculateForce()
-print("Resultant internal force is "+str(force)+" N")
+    distanceX = calculateDistance(V1X,V2X,t,accX)
+    print("X Distance travelled is "+str(distanceX)+" m")
+    distanceY = calculateDistance(V1Y,V2Y,t,accY)
+    print("Y Distance travelled is "+str(distanceY)+" m")
+    distanceZ = calculateDistance(V1Z,V2Z,t,accZ)
+    print("Z Distance travelled is "+str(distanceZ)+" m")
+    distance = calculateResultantValue(distanceX,distanceY,distanceZ)
+    print("Resultant distance = "+str(distance)+" m")
 
-t1 = nm.arange(-10.0,10.0,0.5)
-plt.figure(1)
-plt.subplot(311)
-plt.plot(t1,getDistanceEquationX(t1, iVelocityX, accX),'r--')
-plt.legend("X axis")
+    forceX = calculateForce(mass,V1X,V2X,t,accX)
+    print("Internal force-x is "+str(forceX)+" N")
+    forceY = calculateForce(mass,V1Y,V2Y,t,accY)
+    print("Internal force-y is "+str(forceY)+" N")
+    forceZ = calculateForce(mass,V1Z,V2Z,t,accZ)
+    print("Internal force-z is "+str(forceZ)+" N")
+    force = calculateResultantValue(forceX,forceY,forceZ)
+    print("Resultant internal force is "+str(force)+" N")
 
-plt.subplot(312)
-plt.plot(t1,getDistanceEquationY(t1, iVelocityY, accY),'r--')
-plt.legend("Y axis")
+    plot_graphs(V1X,V1Y,V1Z,accX,accY,accZ,t)
 
-plt.subplot(313)
-plt.plot(t1,getDistanceEquationZ(t1, iVelocityZ, accZ),'r--')
-plt.legend("Z axis")
-plt.show()
+def plot_graphs(V1X,V1Y,V1Z,accX,accY,accZ,time):
+    t = nm.arange(0,time*2,0.1)
+    plt.figure(1)
+    plt.subplot(311)
+    plt.plot(t,getDistance_Time_Equation(t, V1X, accX),'r--')
+    plt.title("DistanceX(t)")
+
+    plt.subplot(312)
+    plt.plot(t,getDistance_Time_Equation(t, V1Y, accY),'r--')
+    plt.title("DistanceY(t)")
+
+    plt.subplot(313)
+    plt.plot(t,getDistance_Time_Equation(t, V1Z, accZ),'r--')
+    plt.title("DistanceZ(t)")
+    plt.show()
+
+#
+initiate()
